@@ -1,0 +1,24 @@
+# Dependencies
+backend-express/node_modules
+frontend-angular/node_modules
+
+# Environment variables
+backend-express/.env
+
+# Logs
+*.log
+
+# Angular
+frontend-angular/.angular
+frontend-angular/dist
+
+# Build
+backend-express/dist
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
