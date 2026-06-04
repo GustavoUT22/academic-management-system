@@ -22,3 +22,23 @@ export const register = async ({ name, email, password, role }) => {
   });
   await user.save();
 };
+
+export const loginAsync = async ({ email, password }) => {
+  const emailExists = await User.findOne({ email });
+  const passwordMatch =
+    emailExists && (await bcrypt.compare(password, emailExists.password));
+
+  if (!emailExists || !passwordMatch) {
+    const error = new Error("Correo o contraseña incorrectos");
+    error.status = 401;
+    throw error;
+  }
+
+  const token = jwt.sign(
+    { userId: emailExists._id, role: emailExists.role },
+    process.env.JWT_SECRET,
+    { expiresIn: "1h" },
+  );
+
+  return token;
+};
