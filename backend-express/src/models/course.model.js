@@ -12,7 +12,7 @@ const courseSchema = new mongoose.Schema({
       type: String,
       required: [true, 'La descripción es obligatoria']
   },
-  teacher: {
+  teacherId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: [true, 'Un curso debe tener un docente asignado']
