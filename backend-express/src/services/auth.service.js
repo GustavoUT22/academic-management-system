@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import User from "../models/user.model.js";
 import { roles } from "../models/user.model.js";
 
-export const register = async ({ name, email, password, role }) => {
+export const registerAsync = async ({ name, email, password, role }) => {
   const userExists = await User.findOne({ email });
   if (userExists) {
     const error = new Error("El correo ya está registrado");
