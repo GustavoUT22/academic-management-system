@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const rolesAvailable = ["student", "teacher", "admin"];
+export const roles = ["student", "teacher", "admin"];
 
 export const userSchema = new mongoose.Schema(
   {
@@ -23,7 +23,7 @@ export const userSchema = new mongoose.Schema(
     role: {
       type: String,
       enum: {
-        values: rolesAvailable,
+        values: roles,
       },
       default: "student",
     },
