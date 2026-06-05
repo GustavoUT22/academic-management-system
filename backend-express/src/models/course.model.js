@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const modalities = ['virtual', 'presencial'];
+export const modalities = ['virtual', 'presencial'];
 
 const courseSchema = new mongoose.Schema({
   name: {
