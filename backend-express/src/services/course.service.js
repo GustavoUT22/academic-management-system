@@ -10,8 +10,8 @@ export const createCourseAsync = async ({
   modality,
   schedule,
 }) => {
-  const teacherExists = await User.findById(teacherId);
-  if (!teacherExists) {
+  const teacher = await User.findById(teacherId);
+  if (!teacher || teacher.role !== "teacher") {
     throw new Error("El docente asignado no existe");
   }
   const newCourse = new Course({
@@ -27,19 +27,46 @@ export const createCourseAsync = async ({
 };
 
 export const updateCourseAsync = async (courseId, updateData) => {
-  console.log("Actualizando curso con ID:", courseId);
-  const courseExists = await Course.findById(courseId);
-  if (!courseExists) {
+  const updatedCourse = await Course.findByIdAndUpdate(courseId, updateData, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!updatedCourse) {
     throw new Error("Curso no encontrado");
   }
 
-const updated = await Course
-
-  console.log("Curso actualizado:", updatedCourse);
   return updatedCourse;
 };
 
-
+//TO-DO: Add query parameters for filtering, pagination, etc.
 export const getCoursesAsync = async () => {
   return await Course.find();
-}
+};
+
+export const deactivateCourseAsync = async (courseId) => {
+  const course = await Course.findById(courseId);
+  if (!course) {
+    throw new Error("Curso no encontrado");
+  }
+
+  course.isActive = false;
+  await course.save();
+};
+
+export const getCourseByIdAsync = async (courseId) => {
+  const course = await Course.findById(courseId);
+  if (!course) {
+    throw new Error("Curso no encontrado");
+  }
+  return course;
+};
+
+export const activateCourseAsync = async (courseId) => {
+  const course = await Course.findById(courseId);
+  if (!course) {
+    throw new Error("Curso no encontrado");
+  }
+  course.isActive = true;
+  await course.save();
+};
