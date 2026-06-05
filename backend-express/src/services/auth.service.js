@@ -1,8 +1,8 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
-import User from "../models/user.model.js";
+import { User } from "../models/user.model.js";
 import { roles } from "../models/user.model.js";
 
 export const registerAsync = async ({ name, email, password, role }) => {

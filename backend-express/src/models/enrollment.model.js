@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const statuses = ["active", "completed", "dropped"];
+export const statuses = ["active", "completed", "dropped"];
 
 const enrollmentSchema = new mongoose.Schema({
   studentId: {
