@@ -7,6 +7,7 @@ dotenv.config();
 
 import courseRoutes from './routes/course.route.js';
 import authRoutes from './routes/auth.route.js';
+import userRoutes from './routes/user.route.js';
 import { connectDB } from "./config/db.js";
 
 const PORT = process.env.PORT || 3000;
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/courses', courseRoutes);
 app.use('/api/auth', authRoutes);
-
+app.use('/api/users', userRoutes);
 await connectDB();
 
 app.listen(PORT, () => {
